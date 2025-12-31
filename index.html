@@ -251,6 +251,7 @@
           <div class="btn-group" role="group" aria-label="抽取按鈕">
             <button class="cta" id="newYearBtn">🎋 新年的氣息</button>
             <button class="cta" id="newYearBtn10">🎋 新年的氣息*10</button>
+            <button class="cta" id="newYearBtn100">🎋 新年的氣息*100</button>
           </div>
         </div>
       </div>
@@ -292,9 +293,7 @@
             <!-- 新增 panel：目前兌換數量 -->
             <div class="exchange-counts" id="exchangeCountsPanel">
               <h3>目前兌換數量</h3>
-              <div class="exchange-counts-list" id="exchangeCountsList">
-                <!-- 由 JS 填入：顯示每個心願箱獎品與目前獲得數量 -->
-              </div>
+              <div class="exchange-counts-list" id="exchangeCountsList"></div>
             </div>
           </div>
 
@@ -317,7 +316,6 @@
         <p style="margin:0 0 12px 0; color:var(--muted);">使用你持有的不同生肖氣息消耗指定數量以開啟對應等級的心願箱。</p>
 
         <div class="exchange-grid" id="exchangeGrid">
-          <!-- 超越等級箱子 -->
           <div class="box" id="box-super">
             <h3>超越等級箱子（需 12 種不同生肖）</h3>
             <p>消耗 12 種不同生肖以開啟，獎勵（機率相等）：</p>
@@ -331,7 +329,6 @@
             </div>
           </div>
 
-          <!-- 大吉等級箱子 -->
           <div class="box" id="box-great">
             <h3>大吉等級箱子（需 9 種不同生肖）</h3>
             <p>消耗 9 種不同生肖以開啟，獎勵（機率相等）：</p>
@@ -345,7 +342,6 @@
             </div>
           </div>
 
-          <!-- 中吉等級箱子 -->
           <div class="box" id="box-medium">
             <h3>中吉等級箱子（需 6 種不同生肖）</h3>
             <p>消耗 6 種不同生肖以開啟，獎勵（機率相等）：</p>
@@ -359,7 +355,6 @@
             </div>
           </div>
 
-          <!-- 小吉等級箱子 -->
           <div class="box" id="box-small">
             <h3>小吉等級箱子（需 3 種不同生肖）</h3>
             <p>消耗 3 種不同生肖以開啟，獎勵（機率相等）：</p>
@@ -388,6 +383,7 @@
     const COST_PER_DRAW = 27;
     const btn = document.getElementById('newYearBtn');
     const btn10 = document.getElementById('newYearBtn10');
+    const btn100 = document.getElementById('newYearBtn100');
     const zodiacItems = document.querySelectorAll('#zodiacGrid .zodiac');
     const subtitle = document.getElementById('subtitle');
     const totalCostEl = document.getElementById('totalCost');
@@ -537,7 +533,6 @@
       return true;
     }
     function pushHistory(entry){
-      // entry: { type: '抽取'|'兌換', name: '龍'|'輪迴碑石', time: 'HH:MM:SS' }
       history.unshift(entry);
       if (history.length > 500) history.pop();
     }
@@ -570,10 +565,9 @@
       updateOwnedDistinctDisplay();
     }
 
-    // 新增：渲染目前兌換數量（心願箱獎品及目前抽到的數量）
+    // 渲染目前兌換數量（心願箱獎品及目前抽到的數量）
     function renderExchangeCounts(){
       exchangeCountsListEl.innerHTML = '';
-      // 按箱子分類顯示
       for (const boxKey of ['super','great','medium','small']) {
         const box = boxDefinitions[boxKey];
         const header = document.createElement('div');
@@ -602,17 +596,27 @@
       ownedDistinctEl.textContent = `目前持有${distinct}種生肖`;
     }
 
+    // Exchange buttons collection (used by withTemporaryDisable)
+    const exchangeButtons = [
+      document.getElementById('exchangeSuper'),
+      document.getElementById('exchangeGreat'),
+      document.getElementById('exchangeMedium'),
+      document.getElementById('exchangeSmall')
+    ];
+
     // Prevent rapid double clicks
     function withTemporaryDisable(fn, ms = 300){
       return function(...args){
         btn.disabled = true;
         btn10.disabled = true;
-        exchangeButtons.forEach(b => b.disabled = true);
+        btn100.disabled = true;
+        exchangeButtons.forEach(b => { if (b) b.disabled = true; });
         try { fn(...args); } finally {
           setTimeout(() => {
             btn.disabled = false;
             btn10.disabled = false;
-            exchangeButtons.forEach(b => b.disabled = false);
+            btn100.disabled = false;
+            exchangeButtons.forEach(b => { if (b) b.disabled = false; });
           }, ms);
         }
       };
@@ -638,13 +642,28 @@
         results.push(name);
       }
       increaseCost(10);
-      subtitle.textContent = `你連續抽到了：${results.join('、')}！`;
+      subtitle.textContent = `你連續抽了 10 次。`;
+      if (!panelRecord.hidden) { renderCounts(); renderHistory(); renderSummaryCost(); renderExchangeCounts(); }
+    }
+
+    // Hundred-draw handler
+    function hundredDraw(){
+      const results = [];
+      for (let i = 0; i < 100; i++){
+        const name = weightedDrawName();
+        updateZodiacCount(name);
+        pushHistory({ type: '抽取', name, time: new Date().toLocaleTimeString() });
+        results.push(name);
+      }
+      increaseCost(100);
+      subtitle.textContent = `你連續抽了 100 次。`;
       if (!panelRecord.hidden) { renderCounts(); renderHistory(); renderSummaryCost(); renderExchangeCounts(); }
     }
 
     // Bind draw events
     btn.addEventListener('click', withTemporaryDisable(singleDraw, 220));
     btn10.addEventListener('click', withTemporaryDisable(tenDraw, 420));
+    btn100.addEventListener('click', withTemporaryDisable(hundredDraw, 1200));
 
     // Redeem button (示意)
     document.getElementById('redeemBtn').addEventListener('click', () => {
@@ -667,13 +686,6 @@
     });
 
     // Exchange logic
-    const exchangeButtons = [
-      document.getElementById('exchangeSuper'),
-      document.getElementById('exchangeGreat'),
-      document.getElementById('exchangeMedium'),
-      document.getElementById('exchangeSmall')
-    ];
-
     function consumeDistinctRandom(namesNeeded){
       const owned = getOwnedDistinctNames();
       if (owned.length < namesNeeded) return null;
@@ -705,7 +717,6 @@
         return;
       }
       const reward = pickBoxReward(boxKey);
-      // 增加獎品計數
       rewardsCounts[reward] = (rewardsCounts[reward] || 0) + 1;
       const time = new Date().toLocaleTimeString();
       pushHistory({ type: '兌換', name: `${boxKey}箱 → ${reward}`, time });
@@ -717,7 +728,14 @@
     }
 
     // Bind exchange buttons with protection
-    exchangeButtons.forEach(btnEl => {
+    const exchangeBtnEls = [
+      document.getElementById('exchangeSuper'),
+      document.getElementById('exchangeGreat'),
+      document.getElementById('exchangeMedium'),
+      document.getElementById('exchangeSmall')
+    ];
+    exchangeBtnEls.forEach(btnEl => {
+      if (!btnEl) return;
       btnEl.addEventListener('click', withTemporaryDisable(() => {
         const boxKey = btnEl.dataset.box;
         exchangeBox(boxKey);
