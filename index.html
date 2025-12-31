@@ -605,7 +605,7 @@
     ];
 
     // Prevent rapid double clicks
-    function withTemporaryDisable(fn, ms = 300){
+    function withTemporaryDisable(fn, ms = 50){
       return function(...args){
         btn.disabled = true;
         btn10.disabled = true;
