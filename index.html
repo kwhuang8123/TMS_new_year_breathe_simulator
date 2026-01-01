@@ -13,6 +13,14 @@
       --accent:#ff3b3b;
       --gold:#f5c452;
       --border:#25304a;
+      --group1-start: #ff9a3c; /* 橘色 */
+      --group1-end:   #ff6a00;
+      --group2-start: #9b6bff; /* 紫色 */
+      --group2-end:   #6b3bff;
+      --group3-start: #4aa3ff; /* 藍色 */
+      --group3-end:   #1b7cff;
+      --group4-start: #2bd6c6; /* 藍綠色 */
+      --group4-end:   #00b39f;
     }
     *{box-sizing:border-box}
     body{
@@ -24,205 +32,85 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
-    .page {
-      max-width:1080px;
-      margin:28px auto;
-      padding:24px;
-    }
+    .page { max-width:1080px; margin:28px auto; padding:24px; }
 
-    /* Tabs */
-    .tabs {
-      display:flex;
-      gap:12px;
-      align-items:center;
-      margin-bottom:18px;
-    }
-    .tab-btn {
-      background:transparent;
-      border:1px solid transparent;
-      color:var(--muted);
-      padding:10px 14px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:700;
-    }
-    .tab-btn[aria-selected="true"]{
-      color: #1b0a0a;
-      background: linear-gradient(90deg,#ff7a7a,#ffd06e);
-      box-shadow: 0 8px 20px rgba(255,120,120,0.12);
-      border-color: rgba(255,255,255,0.06);
-    }
+    .tabs { display:flex; gap:12px; align-items:center; margin-bottom:18px; }
+    .tab-btn { background:transparent; border:1px solid transparent; color:var(--muted); padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:700; }
+    .tab-btn[aria-selected="true"]{ color:#1b0a0a; background: linear-gradient(90deg,#ff7a7a,#ffd06e); box-shadow: 0 8px 20px rgba(255,120,120,0.12); border-color: rgba(255,255,255,0.06); }
 
-    /* Header area inside tab content */
-    .header {
-      display:grid;
-      grid-template-columns: 1fr auto;
-      gap:16px;
-      align-items:center;
-      margin-bottom:18px;
-    }
-    .title h1{
-      margin:0;
-      font-size:26px;
-      background: linear-gradient(90deg,#ff7a7a,#ffd06e);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-    .subtitle{
-      margin-top:6px;
-      color:var(--muted);
-      font-size:14px;
-    }
+    .header { display:grid; grid-template-columns: 1fr auto; gap:16px; align-items:center; margin-bottom:18px; }
+    .title h1{ margin:0; font-size:26px; background: linear-gradient(90deg,#ff7a7a,#ffd06e); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .subtitle{ margin-top:6px; color:var(--muted); font-size:14px; }
 
-    .controls {
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-
-    .cost-box{
-      background: linear-gradient(180deg,#2a1b1b,#1a0f0f);
-      border:1px solid rgba(255,255,255,0.04);
-      padding:10px 14px;
-      border-radius:12px;
-      min-width:150px;
-      text-align:left;
-    }
+    .controls { display:flex; gap:12px; align-items:center; }
+    .cost-box{ background: linear-gradient(180deg,#2a1b1b,#1a0f0f); border:1px solid rgba(255,255,255,0.04); padding:10px 14px; border-radius:12px; min-width:150px; text-align:left; }
     .cost-box .label{ font-size:12px; color:var(--muted); }
     .cost-box .amount{ margin-top:6px; font-weight:800; font-size:16px; color:#ffd9a8; }
 
     .btn-group{ display:flex; gap:10px; }
-
-    .cta{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      background:linear-gradient(90deg,#ff5d5d,#ff9f5a);
-      color:#1b0a0a;
-      font-weight:800;
-      border:none;
-      border-radius:999px;
-      padding:10px 16px;
-      cursor:pointer;
-      box-shadow:0 10px 24px rgba(255,95,95,0.18);
-    }
+    .cta{ display:inline-flex; align-items:center; gap:8px; background:linear-gradient(90deg,#ff5d5d,#ff9f5a); color:#1b0a0a; font-weight:800; border:none; border-radius:999px; padding:10px 16px; cursor:pointer; box-shadow:0 10px 24px rgba(255,95,95,0.18); }
     .cta:disabled{ opacity:0.6; cursor:not-allowed; transform:none; box-shadow:none; }
 
-    /* Card and grid */
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:18px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.28);
-    }
+    .card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,0.28); }
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap:14px;
-      margin-top:14px;
-    }
+    .grid{ display:grid; grid-template-columns: repeat(6, 1fr); gap:14px; margin-top:14px; }
+
+    /* 基本 zodiac 樣式 */
     .zodiac{
-      background: linear-gradient(180deg,#1c2038,#151831);
       border:1px solid #2a3355;
       border-radius:14px;
       padding:12px 8px;
       text-align:center;
       position:relative;
+      color: #fff;
+      transition: transform .12s ease, box-shadow .12s ease;
     }
-    .chip{
-      position:absolute;
-      top:8px;
-      left:8px;
-      background: rgba(255,255,255,0.04);
-      color:var(--muted);
-      font-size:11px;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.06);
-    }
-    .icon{ font-size:28px; margin:8px 0 6px; }
-    .name{ font-size:14px; font-weight:700; color:#e6ecff; }
-    .note{ font-size:12px; color:var(--muted); margin-top:6px; }
+    .zodiac:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.35); }
 
-    /* Second tab content */
-    .record {
-      display:flex;
-      gap:18px;
-      margin-top:12px;
-      align-items:flex-start;
-    }
-    .counts {
-      min-width:260px;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:12px;
-    }
+    .chip{ position:absolute; top:8px; left:8px; background: rgba(255,255,255,0.04); color:var(--muted); font-size:11px; padding:4px 8px; border-radius:999px; border:1px solid rgba(255,255,255,0.06); }
+    .icon{ font-size:28px; margin:8px 0 6px; }
+    .name{ font-size:14px; font-weight:700; color:#fff; }
+    .note{ font-size:12px; color:rgba(255,255,255,0.85); margin-top:6px; }
+
+    /* 分組背景色覆寫 */
+    .group-1 { background: linear-gradient(180deg, var(--group1-start), var(--group1-end)); border-color: rgba(255,140,60,0.35); }
+    .group-2 { background: linear-gradient(180deg, var(--group2-start), var(--group2-end)); border-color: rgba(120,70,255,0.28); }
+    .group-3 { background: linear-gradient(180deg, var(--group3-start), var(--group3-end)); border-color: rgba(30,130,255,0.28); }
+    .group-4 { background: linear-gradient(180deg, var(--group4-start), var(--group4-end)); border-color: rgba(0,180,150,0.28); }
+
+    /* 調整文字對比 */
+    .group-1 .name, .group-1 .note { color: #2b0b00; }
+    .group-2 .name, .group-2 .note { color: #f6ecff; }
+    .group-3 .name, .group-3 .note { color: #04122b; }
+    .group-4 .name, .group-4 .note { color: #002b26; }
+
+    .record { display:flex; gap:18px; margin-top:12px; align-items:flex-start; }
+    .counts { min-width:260px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px; }
     .counts h3{ margin:0 0 8px 0; font-size:14px; color:#e6ecff; }
     .counts-list{ display:grid; grid-template-columns:1fr 1fr; gap:6px; font-size:13px; color:var(--muted); }
 
-    /* 新增：目前兌換數量 panel */
-    .exchange-counts {
-      margin-top:12px;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:12px;
-    }
+    .exchange-counts { margin-top:12px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px; }
     .exchange-counts h3 { margin:0 0 8px 0; font-size:14px; color:#ffdca8; }
     .exchange-counts-list { display:grid; grid-template-columns:1fr; gap:6px; font-size:13px; color:var(--muted); }
 
-    .history {
-      flex:1;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:12px;
-      max-height:320px;
-      overflow:auto;
-    }
+    .history { flex:1; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px; max-height:320px; overflow:auto; }
     .history h3{ margin:0 0 8px 0; font-size:14px; color:#e6ecff; }
     .history-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
     .history-item{ font-size:13px; color:var(--muted); padding:8px; border-radius:8px; background:rgba(255,255,255,0.01); border:1px solid rgba(255,255,255,0.02); }
 
-    /* Exchange tab */
     .exchange-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; margin-top:12px; }
-    .box {
-      background: linear-gradient(180deg,#162033,#0f1524);
-      border:1px solid #24324f;
-      border-radius:12px;
-      padding:12px;
-    }
+    .box { background: linear-gradient(180deg,#162033,#0f1524); border:1px solid #24324f; border-radius:12px; padding:12px; }
     .box h3 { margin:0 0 8px 0; color:#ffdca8; }
     .box p { margin:0 0 10px 0; color:var(--muted); font-size:13px; }
     .box .rewards { display:flex; gap:8px; flex-wrap:wrap; }
     .reward { background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:8px; font-size:13px; color:var(--muted); border:1px solid rgba(255,255,255,0.02); }
 
-    .exchange-result {
-      margin-top:12px;
-      padding:12px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      border:1px solid var(--border);
-      border-radius:12px;
-      color:var(--muted);
-    }
+    .exchange-result { margin-top:12px; padding:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid var(--border); border-radius:12px; color:var(--muted); }
 
     footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
 
-    @media (max-width:900px){
-      .grid{ grid-template-columns: repeat(4,1fr); }
-      .header{ grid-template-columns:1fr; }
-      .controls{ justify-content:flex-start; }
-      .exchange-grid{ grid-template-columns: 1fr; }
-    }
-    @media (max-width:560px){
-      .grid{ grid-template-columns: repeat(3,1fr); }
-      .record{ flex-direction:column; }
-      .counts{ width:100%; }
-    }
+    @media (max-width:900px){ .grid{ grid-template-columns: repeat(4,1fr); } .header{ grid-template-columns:1fr; } .controls{ justify-content:flex-start; } .exchange-grid{ grid-template-columns: 1fr; } }
+    @media (max-width:560px){ .grid{ grid-template-columns: repeat(3,1fr); } .record{ flex-direction:column; } .counts{ width:100%; } }
   </style>
 </head>
 <body>
@@ -256,21 +144,25 @@
         </div>
       </div>
 
-      <div class="card" aria-live="polite">
-        <div class="grid" id="zodiacGrid" role="list" aria-label="十二生肖">
-          <div class="zodiac" role="listitem"><span class="chip">牛</span><div class="icon">🐂</div><div class="name">牛</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">虎</span><div class="icon">🐯</div><div class="name">虎</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">兔</span><div class="icon">🐰</div><div class="name">兔</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">龍</span><div class="icon">🐉</div><div class="name">龍</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">蛇</span><div class="icon">🐍</div><div class="name">蛇</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">馬</span><div class="icon">🐴</div><div class="name">馬</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">羊</span><div class="icon">🐐</div><div class="name">羊</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">猴</span><div class="icon">🐵</div><div class="name">猴</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">雞</span><div class="icon">🐔</div><div class="name">雞</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">狗</span><div class="icon">🐶</div><div class="name">狗</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">豬</span><div class="icon">🐷</div><div class="name">豬</div><div class="note">0個</div></div>
-          <div class="zodiac" role="listitem"><span class="chip">鼠</span><div class="icon">🐭</div><div class="name">鼠</div><div class="note">0個</div></div>
-        </div>
+<div class="card" aria-live="polite"> <!-- 依使用者指定順序與分組，並加上 group-* class --> 
+  <div class="grid" id="zodiacGrid" role="list" aria-label="十二生肖"> 
+    <!-- 第一組 group-1 (橘色): 馬、羊、猴 --> 
+    <div class="zodiac group-1" role="listitem"><span class="chip">馬</span><div class="icon">🐴</div><div class="name">馬</div><div class="note">0個</div></div> 
+    <div class="zodiac group-1" role="listitem"><span class="chip">羊</span><div class="icon">🐐</div><div class="name">羊</div><div class="note">0個</div></div>
+    <div class="zodiac group-1" role="listitem"><span class="chip">猴</span><div class="icon">🐵</div><div class="name">猴</div><div class="note">0個</div></div>
+     <!-- 第二組 group-2 (紫色): 雞、狗、豬 --> 
+    <div class="zodiac group-2" role="listitem"><span class="chip">雞</span><div class="icon">🐔</div><div class="name">雞</div><div class="note">0個</div></div> 
+    <div class="zodiac group-2" role="listitem"><span class="chip">狗</span><div class="icon">🐶</div><div class="name">狗</div><div class="note">0個</div></div> 
+    <div class="zodiac group-2" role="listitem"><span class="chip">豬</span><div class="icon">🐷</div><div class="name">豬</div><div class="note">0個</div></div> 
+    <!-- 第三組 group-3 (藍色): 鼠、牛、虎 --> 
+    <div class="zodiac group-3" role="listitem"><span class="chip">鼠</span><div class="icon">🐭</div><div class="name">鼠</div><div class="note">0個</div></div> 
+    <div class="zodiac group-3" role="listitem"><span class="chip">牛</span><div class="icon">🐂</div><div class="name">牛</div><div class="note">0個</div></div> 
+    <div class="zodiac group-3" role="listitem"><span class="chip">虎</span><div class="icon">🐯</div><div class="name">虎</div><div class="note">0個</div></div> 
+    <!-- 第四組 group-4 (藍綠色): 兔、龍、蛇 --> 
+     <div class="zodiac group-4" role="listitem"><span class="chip">兔</span><div class="icon">🐰</div><div class="name">兔</div><div class="note">0個</div></div> 
+     <div class="zodiac group-4" role="listitem"><span class="chip">龍</span><div class="icon">🐉</div><div class="name">龍</div><div class="note">0個</div></div> 
+     <div class="zodiac group-4" role="listitem"><span class="chip">蛇</span><div class="icon">🐍</div><div class="name">蛇</div><div class="note">0個</div></div> 
+    </div>
 
         <div style="margin-top:18px; display:flex; gap:12px; align-items:center;">
           <div style="flex:1; color:var(--muted); font-size:13px;">
@@ -379,375 +271,347 @@
   </div>
 
   <script>
-    // Constants and DOM
-    const COST_PER_DRAW = 27;
-    const btn = document.getElementById('newYearBtn');
-    const btn10 = document.getElementById('newYearBtn10');
-    const btn100 = document.getElementById('newYearBtn100');
-    const zodiacItems = document.querySelectorAll('#zodiacGrid .zodiac');
-    const subtitle = document.getElementById('subtitle');
-    const totalCostEl = document.getElementById('totalCost');
-    const historyListEl = document.getElementById('historyList');
-    const countsListEl = document.getElementById('countsList');
-    const summaryCostEl = document.getElementById('summaryCost');
-    const clearHistoryBtn = document.getElementById('clearHistory');
-    const exchangeResultEl = document.getElementById('exchangeResult');
-    const exchangeCountsListEl = document.getElementById('exchangeCountsList');
-    const ownedDistinctEl = document.getElementById('ownedDistinct');
+  // Constants and DOM
+  const COST_PER_DRAW = 27;
+  const btn = document.getElementById('newYearBtn');
+  const btn10 = document.getElementById('newYearBtn10');
+  const btn100 = document.getElementById('newYearBtn100');
+  const zodiacItems = document.querySelectorAll('#zodiacGrid .zodiac');
+  const subtitle = document.getElementById('subtitle');
+  const totalCostEl = document.getElementById('totalCost');
+  const historyListEl = document.getElementById('historyList');
+  const countsListEl = document.getElementById('countsList');
+  const summaryCostEl = document.getElementById('summaryCost');
+  const clearHistoryBtn = document.getElementById('clearHistory');
+  const exchangeResultEl = document.getElementById('exchangeResult');
+  const exchangeCountsListEl = document.getElementById('exchangeCountsList');
+  const ownedDistinctEl = document.getElementById('ownedDistinct');
 
-    // Tabs
-    const tabActivity = document.getElementById('tab-activity');
-    const tabRecord = document.getElementById('tab-record');
-    const tabExchange = document.getElementById('tab-exchange');
-    const panelActivity = document.getElementById('panel-activity');
-    const panelRecord = document.getElementById('panel-record');
-    const panelExchange = document.getElementById('panel-exchange');
+  // Tabs
+  const tabActivity = document.getElementById('tab-activity');
+  const tabRecord = document.getElementById('tab-record');
+  const tabExchange = document.getElementById('tab-exchange');
+  const panelActivity = document.getElementById('panel-activity');
+  const panelRecord = document.getElementById('panel-record');
+  const panelExchange = document.getElementById('panel-exchange');
 
-    tabActivity.addEventListener('click', () => {
-      tabActivity.setAttribute('aria-selected','true');
-      tabRecord.setAttribute('aria-selected','false');
-      tabExchange.setAttribute('aria-selected','false');
-      panelActivity.hidden = false;
-      panelRecord.hidden = true;
-      panelExchange.hidden = true;
-    });
-    tabRecord.addEventListener('click', () => {
-      tabActivity.setAttribute('aria-selected','false');
-      tabRecord.setAttribute('aria-selected','true');
-      tabExchange.setAttribute('aria-selected','false');
-      panelActivity.hidden = true;
-      panelRecord.hidden = false;
-      panelExchange.hidden = true;
-      renderCounts();
-      renderExchangeCounts();
-      renderSummaryCost();
-      renderHistory();
-    });
-    tabExchange.addEventListener('click', () => {
-      tabActivity.setAttribute('aria-selected','false');
-      tabRecord.setAttribute('aria-selected','false');
-      tabExchange.setAttribute('aria-selected','true');
-      panelActivity.hidden = true;
-      panelRecord.hidden = true;
-      panelExchange.hidden = false;
-      renderCounts();
-      renderExchangeCounts();
-      renderSummaryCost();
-      renderHistory();
-    });
+  tabActivity.addEventListener('click', () => {
+    tabActivity.setAttribute('aria-selected','true');
+    tabRecord.setAttribute('aria-selected','false');
+    tabExchange.setAttribute('aria-selected','false');
+    panelActivity.hidden = false;
+    panelRecord.hidden = true;
+    panelExchange.hidden = true;
+  });
+  tabRecord.addEventListener('click', () => {
+    tabActivity.setAttribute('aria-selected','false');
+    tabRecord.setAttribute('aria-selected','true');
+    tabExchange.setAttribute('aria-selected','false');
+    panelActivity.hidden = true;
+    panelRecord.hidden = false;
+    panelExchange.hidden = true;
+    renderCounts();
+    renderExchangeCounts();
+    renderSummaryCost();
+    renderHistory();
+  });
+  tabExchange.addEventListener('click', () => {
+    tabActivity.setAttribute('aria-selected','false');
+    tabRecord.setAttribute('aria-selected','false');
+    tabExchange.setAttribute('aria-selected','true');
+    panelActivity.hidden = true;
+    panelRecord.hidden = true;
+    panelExchange.hidden = false;
+    renderCounts();
+    renderExchangeCounts();
+    renderSummaryCost();
+    renderHistory();
+  });
 
-    // Probabilities (as decimals)
-    const probabilities = {
-      "馬": 0.0015,
-      "羊": 0.0020,
-      "猴": 0.0025,
-      "雞": 0.0080,
-      "狗": 0.0090,
-      "豬": 0.0100,
-      "鼠": 0.0250,
-      "牛": 0.0300,
-      "虎": 0.0350,
-      "兔": 0.2920,
-      "龍": 0.2925,
-      "蛇": 0.2925
-    };
+  // Probabilities (as decimals)
+  const probabilities = {
+    "馬": 0.0015,
+    "羊": 0.0020,
+    "猴": 0.0025,
+    "雞": 0.0080,
+    "狗": 0.0090,
+    "豬": 0.0100,
+    "鼠": 0.0250,
+    "牛": 0.0300,
+    "虎": 0.0350,
+    "兔": 0.2920,
+    "龍": 0.2925,
+    "蛇": 0.2925
+  };
 
-    // Build cumulative distribution
-    const cumulative = [];
-    (function buildCumulative(){
-      let sum = 0;
-      for (const [name, prob] of Object.entries(probabilities)) {
-        sum += prob;
-        cumulative.push({ name, threshold: sum });
-      }
-      cumulative[cumulative.length - 1].threshold = 1;
-    })();
-
-    function weightedDrawName(){
-      const r = Math.random();
-      for (const item of cumulative) {
-        if (r <= item.threshold) return item.name;
-      }
-      return cumulative[cumulative.length - 1].name;
+  // Build cumulative distribution
+  const cumulative = [];
+  (function buildCumulative(){
+    let sum = 0;
+    for (const [name, prob] of Object.entries(probabilities)) {
+      sum += prob;
+      cumulative.push({ name, threshold: sum });
     }
+    cumulative[cumulative.length - 1].threshold = 1;
+  })();
 
-    // State
-    let totalCost = 0;
-    const history = []; // 每次抽取或兌換的紀錄（物件）
-    const counts = {};  // 各生肖數量
-    const rewardsCounts = {}; // 各獎品獲得數量
+  function weightedDrawName(){
+    const r = Math.random();
+    for (const item of cumulative) {
+      if (r <= item.threshold) return item.name;
+    }
+    return cumulative[cumulative.length - 1].name;
+  }
 
-    // 初始化 counts 為 0
+  // State
+  let totalCost = 0;
+  const history = []; // 每次抽取或兌換的紀錄（物件）
+  const counts = {};  // 各生肖數量
+  const rewardsCounts = {}; // 各獎品獲得數量
+
+  // 初始化 counts 為 0
+  Array.from(zodiacItems).forEach(item => {
+    const name = item.querySelector('.name').textContent;
+    counts[name] = 0;
+  });
+
+  // Box definitions and rewards
+  const boxDefinitions = {
+    super: {
+      require: 12,
+      rewards: ['輪迴碑石', '燃燒之戒', '苦行的戒指']
+    },
+    great: {
+      require: 9,
+      rewards: ['魔法賦予第3階段賦予卷軸', '時裝內襯1種選擇券', '魔法靈氣30個交換券']
+    },
+    medium: {
+      require: 6,
+      rewards: ['高級自定義皮膚變更券交換券', '彩色稜鏡Pro交換券', '自由造型券 10個']
+    },
+    small: {
+      require: 3,
+      rewards: ['閃炫方塊', '恢復附加方塊', '恢復方塊']
+    }
+  };
+
+  // Initialize rewardsCounts keys
+  (function initRewardsCounts(){
+    for (const boxKey of Object.keys(boxDefinitions)) {
+      for (const r of boxDefinitions[boxKey].rewards) {
+        rewardsCounts[r] = 0;
+      }
+    }
+  })();
+
+  // Helpers
+  function formatCurrency(n){ return `${n}元`; }
+  function increaseCost(times){
+    totalCost += COST_PER_DRAW * times;
+    totalCostEl.textContent = formatCurrency(totalCost);
+  }
+  function updateZodiacCount(name){
+    counts[name] = (counts[name] || 0) + 1;
+    const selected = Array.from(zodiacItems).find(item => item.querySelector('.name').textContent === name);
+    if (selected) selected.querySelector('.note').textContent = `${counts[name]}個`;
+    updateOwnedDistinctDisplay();
+  }
+  function decreaseZodiacCount(name){
+    if (!counts[name] || counts[name] <= 0) return false;
+    counts[name] = counts[name] - 1;
+    const selected = Array.from(zodiacItems).find(item => item.querySelector('.name').textContent === name);
+    if (selected) selected.querySelector('.note').textContent = `${counts[name]}個`;
+    updateOwnedDistinctDisplay();
+    return true;
+  }
+  function pushHistory(entry){
+    // entry: { type: '抽取'|'兌換', name: '龍'|'輪迴碑石', time: 'HH:MM:SS' }
+    history.unshift(entry);
+    if (history.length > 500) history.pop();
+  }
+
+  function renderHistory(){
+    historyListEl.innerHTML = '';
+    if (history.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'history-item';
+      li.textContent = '尚無抽取紀錄';
+      historyListEl.appendChild(li);
+      return;
+    }
+    for (const h of history) {
+      const li = document.createElement('li');
+      li.className = 'history-item';
+      li.textContent = `${h.time} — ${h.type}：${h.name}`;
+      historyListEl.appendChild(li);
+    }
+  }
+
+  function renderCounts(){
+    countsListEl.innerHTML = '';
     Array.from(zodiacItems).forEach(item => {
       const name = item.querySelector('.name').textContent;
-      counts[name] = 0;
+      const div = document.createElement('div');
+      div.textContent = `${name}：${counts[name] || 0}個`;
+      countsListEl.appendChild(div);
     });
+    updateOwnedDistinctDisplay();
+  }
 
-    // Box definitions and rewards
-    const boxDefinitions = {
-      super: {
-        require: 12,
-        rewards: ['輪迴碑石', '燃燒之戒', '苦行的戒指']
-      },
-      great: {
-        require: 9,
-        rewards: ['魔法賦予第3階段賦予卷軸', '時裝內襯1種選擇券', '魔法靈氣30個交換券']
-      },
-      medium: {
-        require: 6,
-        rewards: ['高級自定義皮膚變更券交換券', '彩色稜鏡Pro交換券', '自由造型券 10個']
-      },
-      small: {
-        require: 3,
-        rewards: ['閃炫方塊', '恢復附加方塊', '恢復方塊']
-      }
-    };
-
-    // Initialize rewardsCounts keys
-    (function initRewardsCounts(){
-      for (const boxKey of Object.keys(boxDefinitions)) {
-        for (const r of boxDefinitions[boxKey].rewards) {
-          rewardsCounts[r] = 0;
-        }
-      }
-    })();
-
-    // Helpers
-    function formatCurrency(n){ return `${n}元`; }
-    function increaseCost(times){
-      totalCost += COST_PER_DRAW * times;
-      totalCostEl.textContent = formatCurrency(totalCost);
-    }
-    function updateZodiacCount(name){
-      counts[name] = (counts[name] || 0) + 1;
-      const selected = Array.from(zodiacItems).find(item => item.querySelector('.name').textContent === name);
-      if (selected) selected.querySelector('.note').textContent = `${counts[name]}個`;
-      updateOwnedDistinctDisplay();
-    }
-    function decreaseZodiacCount(name){
-      if (!counts[name] || counts[name] <= 0) return false;
-      counts[name] = counts[name] - 1;
-      const selected = Array.from(zodiacItems).find(item => item.querySelector('.name').textContent === name);
-      if (selected) selected.querySelector('.note').textContent = `${counts[name]}個`;
-      updateOwnedDistinctDisplay();
-      return true;
-    }
-    function pushHistory(entry){
-      history.unshift(entry);
-      if (history.length > 500) history.pop();
-    }
-
-    function renderHistory(){
-      historyListEl.innerHTML = '';
-      if (history.length === 0) {
-        const li = document.createElement('li');
-        li.className = 'history-item';
-        li.textContent = '尚無抽取紀錄';
-        historyListEl.appendChild(li);
-        return;
-      }
-      for (const h of history) {
-        const li = document.createElement('li');
-        li.className = 'history-item';
-        li.textContent = `${h.time} — ${h.type}：${h.name}`;
-        historyListEl.appendChild(li);
+  // 渲染目前兌換數量（心願箱獎品及目前抽到的數量）
+  function renderExchangeCounts(){
+    exchangeCountsListEl.innerHTML = '';
+    for (const boxKey of ['super','great','medium','small']) {
+      const box = boxDefinitions[boxKey];
+      const header = document.createElement('div');
+      header.style.fontWeight = '700';
+      header.style.marginTop = '6px';
+      header.textContent = `${boxKey === 'super' ? '超越' : boxKey === 'great' ? '大吉' : boxKey === 'medium' ? '中吉' : '小吉'} 等級箱子 獎品：`;
+      exchangeCountsListEl.appendChild(header);
+      for (const r of box.rewards) {
+        const row = document.createElement('div');
+        row.textContent = `${r}：${rewardsCounts[r] || 0} 個`;
+        exchangeCountsListEl.appendChild(row);
       }
     }
+  }
 
-    function renderCounts(){
-      countsListEl.innerHTML = '';
-      Array.from(zodiacItems).forEach(item => {
-        const name = item.querySelector('.name').textContent;
-        const div = document.createElement('div');
-        div.textContent = `${name}：${counts[name] || 0}個`;
-        countsListEl.appendChild(div);
-      });
-      updateOwnedDistinctDisplay();
-    }
+  function renderSummaryCost(){
+    summaryCostEl.textContent = formatCurrency(totalCost);
+  }
 
-    // 渲染目前兌換數量（心願箱獎品及目前抽到的數量）
-    function renderExchangeCounts(){
-      exchangeCountsListEl.innerHTML = '';
-      for (const boxKey of ['super','great','medium','small']) {
-        const box = boxDefinitions[boxKey];
-        const header = document.createElement('div');
-        header.style.fontWeight = '700';
-        header.style.marginTop = '6px';
-        header.textContent = `${boxKey === 'super' ? '超越' : boxKey === 'great' ? '大吉' : boxKey === 'medium' ? '中吉' : '小吉'} 等級箱子 獎品：`;
-        exchangeCountsListEl.appendChild(header);
-        for (const r of box.rewards) {
-          const row = document.createElement('div');
-          row.textContent = `${r}：${rewardsCounts[r] || 0} 個`;
-          exchangeCountsListEl.appendChild(row);
-        }
-      }
-    }
+  function getOwnedDistinctNames(){
+    return Object.keys(counts).filter(name => counts[name] > 0);
+  }
 
-    function renderSummaryCost(){
-      summaryCostEl.textContent = formatCurrency(totalCost);
-    }
+  function updateOwnedDistinctDisplay(){
+    const distinct = getOwnedDistinctNames().length;
+    ownedDistinctEl.textContent = `目前持有${distinct}種生肖`;
+  }
 
-    function getOwnedDistinctNames(){
-      return Object.keys(counts).filter(name => counts[name] > 0);
-    }
+  // Single draw handler (直接綁定，不做暫時禁用)
+  function singleDraw(){
+    const name = weightedDrawName();
+    updateZodiacCount(name);
+    pushHistory({ type: '抽取', name, time: new Date().toLocaleTimeString() });
+    increaseCost(1);
+    subtitle.textContent = `你抽到了 ${name}！`;
+    if (!panelRecord.hidden) { renderCounts(); renderHistory(); renderSummaryCost(); renderExchangeCounts(); }
+  }
 
-    function updateOwnedDistinctDisplay(){
-      const distinct = getOwnedDistinctNames().length;
-      ownedDistinctEl.textContent = `目前持有${distinct}種生肖`;
-    }
-
-    // Exchange buttons collection (used by withTemporaryDisable)
-    const exchangeButtons = [
-      document.getElementById('exchangeSuper'),
-      document.getElementById('exchangeGreat'),
-      document.getElementById('exchangeMedium'),
-      document.getElementById('exchangeSmall')
-    ];
-
-    // Prevent rapid double clicks
-    function withTemporaryDisable(fn, ms = 50){
-      return function(...args){
-        btn.disabled = true;
-        btn10.disabled = true;
-        btn100.disabled = true;
-        exchangeButtons.forEach(b => { if (b) b.disabled = true; });
-        try { fn(...args); } finally {
-          setTimeout(() => {
-            btn.disabled = false;
-            btn10.disabled = false;
-            btn100.disabled = false;
-            exchangeButtons.forEach(b => { if (b) b.disabled = false; });
-          }, ms);
-        }
-      };
-    }
-
-    // Single draw handler
-    function singleDraw(){
+  // Ten-draw handler (直接綁定)
+  function tenDraw(){
+    for (let i = 0; i < 10; i++){
       const name = weightedDrawName();
       updateZodiacCount(name);
       pushHistory({ type: '抽取', name, time: new Date().toLocaleTimeString() });
-      increaseCost(1);
-      subtitle.textContent = `你抽到了 ${name}！`;
-      if (!panelRecord.hidden) { renderCounts(); renderHistory(); renderSummaryCost(); renderExchangeCounts(); }
     }
+    increaseCost(10);
+    subtitle.textContent = `你連續抽了 10 次。`;
+    if (!panelRecord.hidden) { renderCounts(); renderHistory(); renderSummaryCost(); renderExchangeCounts(); }
+  }
 
-    // Ten-draw handler
-    function tenDraw(){
-      const results = [];
-      for (let i = 0; i < 10; i++){
-        const name = weightedDrawName();
-        updateZodiacCount(name);
-        pushHistory({ type: '抽取', name, time: new Date().toLocaleTimeString() });
-        results.push(name);
-      }
-      increaseCost(10);
-      subtitle.textContent = `你連續抽了 10 次。`;
-      if (!panelRecord.hidden) { renderCounts(); renderHistory(); renderSummaryCost(); renderExchangeCounts(); }
+  // Hundred-draw handler (直接綁定)
+  function hundredDraw(){
+    for (let i = 0; i < 100; i++){
+      const name = weightedDrawName();
+      updateZodiacCount(name);
+      pushHistory({ type: '抽取', name, time: new Date().toLocaleTimeString() });
     }
+    increaseCost(100);
+    subtitle.textContent = `你連續抽了 100 次。`;
+    if (!panelRecord.hidden) { renderCounts(); renderHistory(); renderSummaryCost(); renderExchangeCounts(); }
+  }
 
-    // Hundred-draw handler
-    function hundredDraw(){
-      const results = [];
-      for (let i = 0; i < 100; i++){
-        const name = weightedDrawName();
-        updateZodiacCount(name);
-        pushHistory({ type: '抽取', name, time: new Date().toLocaleTimeString() });
-        results.push(name);
-      }
-      increaseCost(100);
-      subtitle.textContent = `你連續抽了 100 次。`;
-      if (!panelRecord.hidden) { renderCounts(); renderHistory(); renderSummaryCost(); renderExchangeCounts(); }
-    }
+  // 直接綁定事件（移除防止連點的延遲包裝）
+  btn.addEventListener('click', singleDraw);
+  btn10.addEventListener('click', tenDraw);
+  btn100.addEventListener('click', hundredDraw);
 
-    // Bind draw events
-    btn.addEventListener('click', withTemporaryDisable(singleDraw, 220));
-    btn10.addEventListener('click', withTemporaryDisable(tenDraw, 420));
-    btn100.addEventListener('click', withTemporaryDisable(hundredDraw, 1200));
+  // Redeem button (示意)
+  document.getElementById('redeemBtn').addEventListener('click', () => {
+    subtitle.textContent = '兌換功能請至「兌換」頁籤操作';
+  });
 
-    // Redeem button (示意)
-    document.getElementById('redeemBtn').addEventListener('click', () => {
-      subtitle.textContent = '兌換功能請至「兌換」頁籤操作';
-    });
-
-    // Clear history
-    clearHistoryBtn.addEventListener('click', () => {
-      history.length = 0;
-      for (const k of Object.keys(counts)) counts[k] = 0;
-      for (const r of Object.keys(rewardsCounts)) rewardsCounts[r] = 0;
-      zodiacItems.forEach(item => item.querySelector('.note').textContent = '0個');
-      totalCost = 0;
-      totalCostEl.textContent = formatCurrency(totalCost);
-      subtitle.textContent = '已清除紀錄與數量';
-      renderCounts();
-      renderHistory();
-      renderSummaryCost();
-      renderExchangeCounts();
-    });
-
-    // Exchange logic
-    function consumeDistinctRandom(namesNeeded){
-      const owned = getOwnedDistinctNames();
-      if (owned.length < namesNeeded) return null;
-      const shuffled = owned.slice().sort(() => Math.random() - 0.5);
-      const chosen = shuffled.slice(0, namesNeeded);
-      chosen.forEach(n => decreaseZodiacCount(n));
-      return chosen;
-    }
-
-    function pickBoxReward(boxKey){
-      const box = boxDefinitions[boxKey];
-      if (!box) return null;
-      const idx = Math.floor(Math.random() * box.rewards.length);
-      return box.rewards[idx];
-    }
-
-    function exchangeBox(boxKey){
-      const box = boxDefinitions[boxKey];
-      if (!box) return;
-      const need = box.require;
-      const ownedDistinct = getOwnedDistinctNames().length;
-      if (ownedDistinct < need) {
-        exchangeResultEl.textContent = `持有不同生肖不足：需要 ${need} 種不同生肖，目前只有 ${ownedDistinct} 種。`;
-        return;
-      }
-      const consumed = consumeDistinctRandom(need);
-      if (!consumed) {
-        exchangeResultEl.textContent = '消耗失敗，請稍後再試。';
-        return;
-      }
-      const reward = pickBoxReward(boxKey);
-      rewardsCounts[reward] = (rewardsCounts[reward] || 0) + 1;
-      const time = new Date().toLocaleTimeString();
-      pushHistory({ type: '兌換', name: `${boxKey}箱 → ${reward}`, time });
-      exchangeResultEl.innerHTML = `<strong>兌換成功</strong>（消耗：${consumed.join('、')}）<br>獲得：<span style="color:#ffdca8">${reward}</span>`;
-      renderCounts();
-      renderHistory();
-      renderSummaryCost();
-      renderExchangeCounts();
-    }
-
-    // Bind exchange buttons with protection
-    const exchangeBtnEls = [
-      document.getElementById('exchangeSuper'),
-      document.getElementById('exchangeGreat'),
-      document.getElementById('exchangeMedium'),
-      document.getElementById('exchangeSmall')
-    ];
-    exchangeBtnEls.forEach(btnEl => {
-      if (!btnEl) return;
-      btnEl.addEventListener('click', withTemporaryDisable(() => {
-        const boxKey = btnEl.dataset.box;
-        exchangeBox(boxKey);
-      }, 500));
-    });
-
-    // Initial render
+  // Clear history
+  clearHistoryBtn.addEventListener('click', () => {
+    history.length = 0;
+    for (const k of Object.keys(counts)) counts[k] = 0;
+    for (const r of Object.keys(rewardsCounts)) rewardsCounts[r] = 0;
+    zodiacItems.forEach(item => item.querySelector('.note').textContent = '0個');
+    totalCost = 0;
     totalCostEl.textContent = formatCurrency(totalCost);
+    subtitle.textContent = '已清除紀錄與數量';
     renderCounts();
     renderHistory();
     renderSummaryCost();
     renderExchangeCounts();
-  </script>
+  });
+
+  // Exchange logic (unchanged)
+  const exchangeBtnEls = [
+    document.getElementById('exchangeSuper'),
+    document.getElementById('exchangeGreat'),
+    document.getElementById('exchangeMedium'),
+    document.getElementById('exchangeSmall')
+  ];
+
+  function consumeDistinctRandom(namesNeeded){
+    const owned = getOwnedDistinctNames();
+    if (owned.length < namesNeeded) return null;
+    const shuffled = owned.slice().sort(() => Math.random() - 0.5);
+    const chosen = shuffled.slice(0, namesNeeded);
+    chosen.forEach(n => decreaseZodiacCount(n));
+    return chosen;
+  }
+
+  function pickBoxReward(boxKey){
+    const box = boxDefinitions[boxKey];
+    if (!box) return null;
+    const idx = Math.floor(Math.random() * box.rewards.length);
+    return box.rewards[idx];
+  }
+
+  function exchangeBox(boxKey){
+    const box = boxDefinitions[boxKey];
+    if (!box) return;
+    const need = box.require;
+    const ownedDistinct = getOwnedDistinctNames().length;
+    if (ownedDistinct < need) {
+      exchangeResultEl.textContent = `持有不同生肖不足：需要 ${need} 種不同生肖，目前只有 ${ownedDistinct} 種。`;
+      return;
+    }
+    const consumed = consumeDistinctRandom(need);
+    if (!consumed) {
+      exchangeResultEl.textContent = '消耗失敗，請稍後再試。';
+      return;
+    }
+    const reward = pickBoxReward(boxKey);
+    rewardsCounts[reward] = (rewardsCounts[reward] || 0) + 1;
+    const time = new Date().toLocaleTimeString();
+    pushHistory({ type: '兌換', name: `${boxKey}箱 → ${reward}`, time });
+    exchangeResultEl.innerHTML = `<strong>兌換成功</strong>（消耗：${consumed.join('、')}）<br>獲得：<span style="color:#ffdca8">${reward}</span>`;
+    renderCounts();
+    renderHistory();
+    renderSummaryCost();
+    renderExchangeCounts();
+  }
+
+  exchangeBtnEls.forEach(btnEl => {
+    if (!btnEl) return;
+    btnEl.addEventListener('click', () => {
+      const boxKey = btnEl.dataset.box;
+      exchangeBox(boxKey);
+    });
+  });
+
+  // Initial render
+  totalCostEl.textContent = formatCurrency(totalCost);
+  renderCounts();
+  renderHistory();
+  renderSummaryCost();
+  renderExchangeCounts();
+</script>
+
 </body>
 </html>
